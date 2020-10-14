@@ -113,7 +113,25 @@ class ThesisGraph:
             self.T_T0  = np.asarray([np.log(ti/t0) for ti in t])
             
     def plot_P_and_EMF_vs_Ch(self,title = 'Test',Date = '14_10_2020',logscaley = 'True',logscalex = 'False', firstlabel = 'Loading cycle',secondlabel = 'Unloading cycle', filetype = 'txt',Secondbatchfilename = ''):
-        
+        """
+    	
+
+    	Parameters
+    	----------
+    	title : Title of the Graph.
+    	Date : Date of today
+    	logscaley : Do you want logscale on y axis
+    	logscalex : Do you want logscale on x axis
+    	firstlabel : Name of the label of the first batch
+    	secondlabel : Name of the label of the second batch
+    	filetype : Type 
+    	Secondbatchfilename : Name of the second batch's file'
+
+    	Returns
+    	-------
+    	None.
+
+    	"""
         Ch = self.Ch
         EMF= self.EMF
         P_H2 = self.P_H2
@@ -160,7 +178,25 @@ class ThesisGraph:
 
 
     def plot_T_T0_vs_Ch(self,title = 'T_T0',Date = '14_10_2020',logscaley = 'False',logscalex = 'False',firstlabel = 'Loading cycle',secondlabel = 'Unloading cycle', filetype = 'txt',Secondbatchfilename = ''):
-        
+        """
+    	Parameters
+    	----------
+    	title : Title of the Graph.
+    	Date : Date of today
+    	logscaley : Do you want logscale on y axis
+    	logscalex : Do you want logscale on x axis
+    	firstlabel : Name of the label of the first batch
+    	secondlabel : Name of the label of the second batch
+    	filetype : Type 
+    	Secondbatchfilename : Name of the second batch's file'
+
+    	Returns
+    	-------
+    	None.
+
+    	"""
+		
+		
         self.fig, self.axs= plt.subplots(1,1,figsize = self.size)
         
         
@@ -211,47 +247,8 @@ class ThesisGraph:
 
 
 a = ThesisGraph()
-a.import_as_txt()
+#a.import_as_txt()
 #a.plot_P_and_EMF_vs_Ch(filetype = 'txt',Secondbatchfilename = 'Thin_Films_10_30_10_Ti_Mg_Ti_Pd_16_07_2020_unload.txt')
 #a.plot_T_T0_vs_Ch (filetype = 'txt',Secondbatchfilename = 'Thin_Films_10_30_10_Ti_Mg_Ti_Pd_16_07_2020_unload.txt')
 #a.import_as_excel()
-   
-    
-"""   
-    def plot_scatter (self,temperwithx = [Trivial_Function for i in range(10)],temperwithy = [Trivial_Function for i in range(10)]):
-
-		
-        for i in range(len(self.axs)):
-			
-            if(not self.has2axis and not self.logscalex and not self.logscaley):
-				
-                self.x[i] = [temperwithx[i](j) for j in self.x[i]]
-                self.y[i] = [temperwithy[i](j) for j in self.y[i]]
-                print(self.y[i])
-                print(self.x[i])
-                print(len(self.x[i]),len(self.y[i]))
-                self.axs[i].scatter(self.x[i],self.y[i],label = self.label[i],color = self.color, marker = self.marker)
-                self.axs[i].set_xlabel(self.xlabel[i])
-                self.axs[i].set_ylabel(self.ylabel[i])
-                self.axs[i].legend(loc = 'best')
-			
-            elif(not self.has2axis and not self.logscalex and self.logscaley):
-                self.x[i] = [temperwithx[i](j) for j in self.x[i]]
-                self.y[i] = [temperwithy[i](j) for j in self.y[i]]
-                self.axs[i].set_yscale = ('log')
-                self.axs[i].scatter(self.x[i],self.y[i],label = self.label[i],color = self.color, marker = self.marker)
-                self.axs[i].set_ylim(min(self.y[i])*0.1,max(self.y[i])*10)
-                self.axs[i].set_xlabel(self.xlabel[i])
-                self.axs[i].set_ylabel(self.ylabel[i])
-                self.axs[i].legend(loc = 'best')			
-			
-			
-        if(self.Save):
-            self.fig.savefig(self.title+'.png')
-
-"""
-
-
-#a  =  ThesisGraph('EMF and P vs Ch',[15,15],[1,2],['Ch','Ch'],['EMF','P_H2'],label = ['P_H2 vs Ch','EMF vs Ch'],x = [Ch[1:],Ch[1:]], y = [EMF[1:],EMF[1:]],Save = True,logscaley=True)
-#a.plot_scatter(temperwithy = [Trivial_Function,PressureH])
 
