@@ -1,6 +1,7 @@
 # Thesis
 The following program can be used to immediately display the scatter plot we aim to analyze.
-#How the repository works
+
+# How the repository works
 First of all make sure the your data are stored according to the excel file or txt file stored in [Results](https://github.com/g95g95/Thesis.git). Make sure the sintax match perfectly,
 otherwise a ValueError will be raised.
 
