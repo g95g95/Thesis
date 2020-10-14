@@ -46,7 +46,7 @@ class ThesisGraph:
         self.EMFu  = []
         
     
-    def  import_as_txt(self,filename = 'Thin_Films_10_30_10_Ti_Mg_Ti_Pd_16_07_2020_load.txt',filepath = 'Test/',spl = ','):
+    def  import_as_txt(self,filename = 'Pd_test.txt',filepath = 'Results/',spl = ','):
         """
         
 
@@ -78,7 +78,7 @@ class ThesisGraph:
             self.T_T0= [np.log((self.data[i,2]/self.data[0,2]))for i in range(len(self.data))]
             
     
-    def  import_as_excel(self,filename = 'boh.xlsx',filepath = 'Test/'):
+    def  import_as_excel(self,filename = 'Pd_test.xls',filepath = 'Results/'):
         
         
         """
