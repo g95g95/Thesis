@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Mar 26 14:16:03 2020
-
 @author: Giulio
 """
 
@@ -47,10 +46,8 @@ class ThesisGraph:
 		Parameters
 		----------
 		filename : name of the file txt  I mean to open
-
 		filepath : name of the filepath.
 		spl : Splitting parameter, setted on ','
-
 		Returns
 		It fills the main attributes of the class by importing from a txt file
 		None.
@@ -72,14 +69,12 @@ class ThesisGraph:
     
 	def  import_as_excel(self,filename = 'Pd_test.xls',filepath = 'Results/'):
 		"""
-
 		Parameters
 		----------
 		filename : name of the file excel I mean to open
 		   
 		filepath : name of the filepath.
 		spl : Splitting parameter, setted on ','
-
 		Returns
 		It fills the main attributes of the class by importing from a excel file
 		None.
@@ -154,7 +149,7 @@ class ThesisGraph:
             
 			self.axs.scatter(self.Ch,self.EMF,marker = 'd',label = secondlabel)
 			self.axs.legend(loc = 'best')
-			self.fig.savefig(title+'_'+Date)
+			self.fig.savefig('Graphs/'+title+'_'+Date)
 			self.Ch = Ch
 			self.Emf= EMF
 			self.P_H2 = P_H2
@@ -172,11 +167,9 @@ class ThesisGraph:
 		secondlabel : Name of the label of the second batch
 		filetype : Type 
 		Secondbatchfilename : Name of the second batch's file'
-
 		Returns
 		-------
 		None.
-
 		"""
 		
 		
@@ -189,7 +182,7 @@ class ThesisGraph:
 
 		self.axs.set_title(title)
 		self.axs.scatter(Ch,T_T0, marker = 'o',label = firstlabel)
-		self. axs.set_ylabel('Relative Trasmittance (a.u.)')	
+		self.axs.set_ylabel('Relative Trasmittance (a.u.)')	
 		self.axs.set_xlabel('Hydrogen concentration over time pulse')
 		
 		if logscalex:
@@ -208,15 +201,34 @@ class ThesisGraph:
 				self.import_as_excel(filename = Secondbatchfilename)
 			self.axs.scatter(self.Ch,self.T_T0,marker = 'd',label = secondlabel)
 			self.axs.legend(loc = 'best')
-			self.fig.savefig(title+'_'+Date)
+			self.fig.savefig('Graphs/'+title+'_'+Date)
 			self.Ch = Ch
 			self.T_T0 = T_T0
 			self.EMF = EMF
 			self.P_H2 = P_H2
 
-a = ThesisGraph()
-#a.import_as_txt()
-#a.plot_P_and_EMF_vs_Ch(filetype = 'txt',Secondbatchfilename = 'Thin_Films_10_30_10_Ti_Mg_Ti_Pd_16_07_2020_unload.txt')
-#a.plot_T_T0_vs_Ch (filetype = 'txt',Secondbatchfilename = 'Thin_Films_10_30_10_Ti_Mg_Ti_Pd_16_07_2020_unload.txt')
-#a.import_as_excel()
+	def plot_trend_txt(self,title = 'Trend of Relative Transmittance',Phdim = 'Relative trasmittance (u.a.)',Element1 = 'KOH',Element2 = "Glicerine",Date = '14_10_2020',spl = ',', filepath = 'Results/',filename = 'Trend.txt',filename2 = '',TT = 30, TS = 1):
+		self.fig, self.axs= plt.subplots(1,1,figsize = self.size)
+		data = [line.strip().split(spl) for line in open(filepath + filename)]
+		del data[0]
+		data = [[float(data[i][j])for j in range(2)] for i in range(len(data))]
+		data = np.asarray(data)
+		t = data[:,0]
+		y = data[:,1]
+		y = [np.log(y[i]/y[0]) for i in range (len(y))]
+		self.axs.set_title(title)
+		self.axs.scatter(t,y, marker = 'o',label = "Trend of "+Phdim + "_" + Element1)
+		self.axs.set_ylabel(Phdim)
+		self.axs.set_xlabel('Time (min.)')
+		if filename2 != '':
+			data = [line.strip().split(spl) for line in open(filepath + filename2)]
+			del data[0]
+			data = [[float(data[i][j])for j in range(2)] for i in range(len(data))]
+			data = np.asarray(data)
+			t = data[:,0]
+			y = data[:,1]
+			y = [np.log(y[i]/y[0]) for i in range (len(y))]
+			self.axs.scatter(t,y, marker = 'o',label = "Trend of "+Phdim +  "_" + Element2)
+		self.axs.legend(loc = 'best')
 
+		self.fig.savefig("Graphs/"+title+'_'+Date)
